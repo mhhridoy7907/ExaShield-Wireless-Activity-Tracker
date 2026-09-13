@@ -1,0 +1,2006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#050807">
+<title>H&S Tech</title>
+<link rel="icon" type="image/png" href="https://i.pinimg.com/736x/af/2e/00/af2e00978cde10c7df25fef2428016b4.jpg">
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+:root{
+    --bg:#050807;
+    --panel:#0b120e;
+    --panel2:#101a14;
+    --border:#203829;
+    --text:#edfff3;
+    --muted:#82978a;
+    --green:#50ef89;
+    --red:#ff6262;
+    --yellow:#ffd45a;
+}
+
+body{
+    min-height:100vh;
+    background:
+        radial-gradient(
+            circle at top,
+            #10251a,
+            #050807 65%
+        );
+    color:var(--text);
+    font-family:Arial,sans-serif;
+}
+
+header{
+    position:sticky;
+    top:0;
+    z-index:50;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    padding:17px 25px;
+    background:rgba(5,8,7,.94);
+    border-bottom:1px solid var(--border);
+    backdrop-filter:blur(15px);
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:13px;
+}
+
+.logo{
+    width:48px;
+    height:48px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid var(--border);
+    border-radius:14px;
+    background:var(--panel2);
+    font-size:25px;
+}
+
+.brand h1{
+    font-size:24px;
+}
+
+.brand p{
+    margin-top:4px;
+    color:var(--muted);
+    font-size:12px;
+}
+
+.headerRight{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.connection{
+    padding:9px 13px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.connection.online{
+    color:var(--green);
+    background:rgba(80,239,137,.08);
+}
+
+.connection.offline{
+    color:var(--red);
+    background:rgba(255,98,98,.08);
+}
+
+button{
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:10px 15px;
+    background:#102218;
+    color:var(--text);
+    cursor:pointer;
+    font-weight:bold;
+}
+
+button:hover{
+    background:#173522;
+}
+
+main{
+    width:min(1400px,calc(100% - 30px));
+    margin:auto;
+    padding:28px 0 70px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.stat{
+    padding:22px;
+    background:
+        linear-gradient(
+            145deg,
+            var(--panel2),
+            var(--panel)
+        );
+    border:1px solid var(--border);
+    border-radius:17px;
+}
+
+.stat span{
+    display:block;
+    color:var(--muted);
+    font-size:11px;
+    letter-spacing:1px;
+    margin-bottom:10px;
+}
+
+.stat strong{
+    font-size:30px;
+}
+
+.green{
+    color:var(--green);
+}
+
+.red{
+    color:var(--red);
+}
+
+.yellow{
+    color:var(--yellow);
+}
+
+.message{
+    margin-top:20px;
+    padding:15px 18px;
+    border:1px solid var(--border);
+    border-radius:13px;
+    background:var(--panel);
+    color:var(--muted);
+    line-height:1.6;
+}
+
+section{
+    margin-top:30px;
+}
+
+.sectionTitle{
+    margin-bottom:15px;
+}
+
+.sectionTitle h2{
+    font-size:21px;
+}
+
+.sectionTitle p{
+    margin-top:5px;
+    color:var(--muted);
+    font-size:13px;
+}
+
+.sensorGrid{
+    display:grid;
+    grid-template-columns:repeat( auto-fit, minmax(280px,1fr) );
+    gap:15px;
+}
+
+.sensor{
+    padding:20px;
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:17px;
+}
+
+.sensorTop{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.node{
+    font-size:17px;
+    font-weight:bold;
+}
+
+.status{
+    font-size:11px;
+    font-weight:bold;
+}
+
+.status.online{
+    color:var(--green);
+}
+
+.status.offline{
+    color:var(--red);
+}
+
+.label{
+    color:var(--muted);
+    font-size:10px;
+    letter-spacing:1px;
+}
+
+.activity{
+    margin:7px 0 13px;
+    font-size:40px;
+    font-weight:bold;
+}
+
+.level{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:20px;
+    font-size:10px;
+    font-weight:bold;
+    margin-bottom:13px;
+}
+
+.level.low{
+    color:var(--green);
+    background:rgba(80,239,137,.08);
+}
+
+.level.medium{
+    color:var(--yellow);
+    background:rgba(255,212,90,.08);
+}
+
+.level.high{
+    color:var(--red);
+    background:rgba(255,98,98,.08);
+}
+
+.bar{
+    width:100%;
+    height:8px;
+    overflow:hidden;
+    border-radius:20px;
+    background:#19261e;
+}
+
+.barFill{
+    height:100%;
+    background:var(--green);
+    transition:width .4s ease;
+}
+
+.details{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    margin-top:14px;
+    color:var(--muted);
+    font-size:12px;
+}
+
+.deviceSummary{
+    margin-top:15px;
+    padding-top:15px;
+    border-top:1px solid var(--border);
+}
+
+.deviceSummary strong{
+    font-size:22px;
+}
+
+.deviceSummary span{
+    display:block;
+    color:var(--muted);
+    font-size:11px;
+    margin-top:4px;
+}
+
+.list{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.alert{
+    padding:17px;
+    background:#190d0d;
+    border:1px solid #552d2d;
+    border-radius:13px;
+}
+
+.alertTitle{
+    color:var(--red);
+    font-weight:bold;
+}
+
+.alertText{
+    margin-top:7px;
+    color:#ddd;
+    line-height:1.7;
+    font-size:13px;
+}
+
+.event{
+    display:grid;
+    grid-template-columns:
+        130px
+        1fr
+        1fr
+        1fr;
+    gap:15px;
+    align-items:center;
+    padding:15px;
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:12px;
+}
+
+.eventNode{
+    color:var(--green);
+    font-weight:bold;
+}
+
+.eventData{
+    color:var(--muted);
+    font-size:13px;
+}
+
+.empty{
+    padding:25px;
+    text-align:center;
+    color:#65776b;
+    border:1px dashed var(--border);
+    border-radius:13px;
+}
+
+.popupBG{
+    position:fixed;
+    inset:0;
+    z-index:100;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    background:rgba(0,0,0,.86);
+}
+
+.hidden{
+    display:none !important;
+}
+
+.popup{
+    width:min(470px,100%);
+    padding:35px;
+    text-align:center;
+    background:#170b0b;
+    border:2px solid var(--red);
+    border-radius:22px;
+}
+
+.popupIcon{
+    font-size:58px;
+    margin-bottom:10px;
+}
+
+.popup h2{
+    color:var(--red);
+    margin-bottom:10px;
+}
+
+.popup p{
+    color:#ddd;
+    line-height:1.6;
+    margin-bottom:25px;
+}
+
+@media(max-width:900px){
+
+    header{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .headerRight{
+        width:100%;
+        justify-content:space-between;
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .event{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+@media(max-width:550px){
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .headerRight{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .headerRight button{
+        width:100%;
+    }
+
+    .event{
+        grid-template-columns:1fr;
+    }
+
+    .details{
+        grid-template-columns:1fr;
+    }
+}
+
+
+/* ===== H&S TECH PREMIUM UI ===== */
+:root{
+    --bg:#030605;
+    --panel:#07100b;
+    --panel2:#0b1710;
+    --panel3:#0f1e15;
+    --border:rgba(91,255,150,.16);
+    --borderStrong:rgba(91,255,150,.34);
+    --text:#effff5;
+    --muted:#7f9788;
+    --green:#55ff9a;
+    --green2:#20d978;
+    --red:#ff5f68;
+    --yellow:#ffd35a;
+    --shadow:0 18px 55px rgba(0,0,0,.34);
+}
+
+body{
+    background:
+        radial-gradient(circle at 8% -10%, rgba(55,255,140,.14), transparent 28%),
+        radial-gradient(circle at 92% 0%, rgba(0,190,120,.09), transparent 25%),
+        linear-gradient(135deg,#020403 0%,#061009 52%,#030605 100%);
+    font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+    letter-spacing:.01em;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    opacity:.16;
+    background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+    background-size:38px 38px;
+    mask-image:linear-gradient(to bottom,black,transparent 90%);
+}
+
+header{
+    padding:15px clamp(16px,3vw,38px);
+    background:rgba(2,6,4,.78);
+    border-bottom:1px solid var(--border);
+    box-shadow:0 10px 35px rgba(0,0,0,.2);
+}
+
+.brand{gap:14px}
+
+.logo{
+    position:relative;
+    width:52px;
+    height:52px;
+    border:1px solid var(--borderStrong);
+    border-radius:16px;
+    background:linear-gradient(145deg,#10251a,#07100b);
+    box-shadow:0 0 28px rgba(85,255,154,.12),inset 0 1px 0 rgba(255,255,255,.05);
+}
+
+.logo::after{
+    content:"";
+    position:absolute;
+    inset:5px;
+    border:1px solid rgba(85,255,154,.08);
+    border-radius:12px;
+}
+
+.logo{
+    font-size:26px;
+}
+
+.brand h1{
+    font-size:23px;
+    letter-spacing:.02em;
+}
+
+.brand h1::after{
+    content:"  /  H&S TECH";
+    color:var(--green);
+    font-size:10px;
+    letter-spacing:.18em;
+    vertical-align:middle;
+    opacity:.85;
+}
+
+.brand p{
+    color:#8ea598;
+    letter-spacing:.03em;
+}
+
+.headerRight{gap:9px}
+
+.connection{
+    border:1px solid rgba(85,255,154,.12);
+    backdrop-filter:blur(10px);
+}
+
+.connection.online{
+    box-shadow:0 0 22px rgba(85,255,154,.08);
+}
+
+button{
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:10px 15px;
+    background:linear-gradient(145deg,#10261a,#09150e);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
+    transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;
+}
+
+button:hover{
+    background:linear-gradient(145deg,#153622,#0b1c12);
+    border-color:var(--borderStrong);
+    transform:translateY(-1px);
+    box-shadow:0 8px 25px rgba(0,0,0,.25);
+}
+
+main{
+    width:min(1450px,calc(100% - 32px));
+    padding:32px 0 90px;
+}
+
+.stats{
+    gap:16px;
+}
+
+.stat{
+    position:relative;
+    overflow:hidden;
+    padding:21px;
+    min-height:112px;
+    background:linear-gradient(145deg,rgba(13,29,19,.96),rgba(5,13,9,.96));
+    border:1px solid var(--border);
+    border-radius:18px;
+    box-shadow:var(--shadow);
+}
+
+.stat::before{
+    content:"";
+    position:absolute;
+    width:100px;
+    height:100px;
+    right:-35px;
+    top:-45px;
+    border-radius:50%;
+    background:rgba(85,255,154,.07);
+    filter:blur(2px);
+}
+
+.stat::after{
+    content:"";
+    position:absolute;
+    left:18px;
+    right:18px;
+    bottom:0;
+    height:1px;
+    background:linear-gradient(90deg,transparent,rgba(85,255,154,.28),transparent);
+}
+
+.stat span{
+    letter-spacing:.14em;
+    font-size:10px;
+}
+
+.stat strong{
+    font-size:32px;
+    letter-spacing:-.04em;
+}
+
+.message{
+    position:relative;
+    margin-top:18px;
+    padding:14px 17px 14px 42px;
+    background:rgba(8,19,13,.72);
+    border:1px solid var(--border);
+    border-radius:13px;
+}
+
+.message::before{
+    content:"";
+    position:absolute;
+    left:17px;
+    top:50%;
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:var(--green);
+    box-shadow:0 0 12px var(--green);
+    transform:translateY(-50%);
+}
+
+section{margin-top:34px}
+
+.sectionTitle{
+    display:flex;
+    align-items:end;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:16px;
+    padding-bottom:12px;
+    border-bottom:1px solid rgba(91,255,150,.09);
+}
+
+.sectionTitle h2{
+    font-size:20px;
+    letter-spacing:-.02em;
+}
+
+.sectionTitle p{
+    margin-top:4px;
+    font-size:12px;
+}
+
+.sensorGrid{
+    gap:16px;
+}
+
+.sensor{
+    position:relative;
+    overflow:hidden;
+    padding:21px;
+    background:linear-gradient(145deg,rgba(10,23,15,.97),rgba(4,10,7,.97));
+    border:1px solid var(--border);
+    border-radius:18px;
+    box-shadow:0 15px 45px rgba(0,0,0,.25);
+    transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;
+}
+
+.sensor:hover{
+    transform:translateY(-3px);
+    border-color:var(--borderStrong);
+    box-shadow:0 20px 55px rgba(0,0,0,.35),0 0 30px rgba(85,255,154,.05);
+}
+
+.sensor::after{
+    content:"";
+    position:absolute;
+    inset:auto 0 0 0;
+    height:2px;
+    background:linear-gradient(90deg,transparent,rgba(85,255,154,.42),transparent);
+}
+
+.sensorTop{margin-bottom:22px}
+
+.node{
+    letter-spacing:.02em;
+}
+
+.status{
+    padding:5px 9px;
+    border-radius:20px;
+    border:1px solid currentColor;
+    opacity:.9;
+}
+
+.status.online{
+    background:rgba(85,255,154,.06);
+}
+
+.status.offline{
+    background:rgba(255,95,104,.06);
+}
+
+.label{
+    letter-spacing:.16em;
+}
+
+.activity{
+    margin:5px 0 10px;
+    font-size:43px;
+    line-height:1;
+    letter-spacing:-.06em;
+}
+
+.level{
+    border:1px solid currentColor;
+    letter-spacing:.1em;
+}
+
+.bar{
+    height:7px;
+    background:#122018;
+    border:1px solid rgba(255,255,255,.03);
+}
+
+.barFill{
+    background:linear-gradient(90deg,var(--green2),var(--green));
+    box-shadow:0 0 13px rgba(85,255,154,.32);
+}
+
+.details{
+    gap:10px;
+}
+
+.details span{
+    padding:7px 9px;
+    border:1px solid rgba(255,255,255,.035);
+    border-radius:8px;
+    background:rgba(255,255,255,.015);
+}
+
+.alert{
+    position:relative;
+    padding:17px 18px 17px 20px;
+    background:linear-gradient(145deg,rgba(40,12,14,.96),rgba(20,7,8,.96));
+    border:1px solid rgba(255,95,104,.28);
+    border-radius:14px;
+    box-shadow:0 12px 35px rgba(0,0,0,.2);
+}
+
+.alert::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:12px;
+    bottom:12px;
+    width:3px;
+    border-radius:0 5px 5px 0;
+    background:var(--red);
+    box-shadow:0 0 15px rgba(255,95,104,.35);
+}
+
+.alertTitle{
+    letter-spacing:.04em;
+}
+
+.event{
+    grid-template-columns:140px repeat(3,1fr);
+    padding:14px 16px;
+    background:rgba(7,17,11,.82);
+    border:1px solid var(--border);
+    border-radius:13px;
+    transition:background .18s ease,border-color .18s ease;
+}
+
+.event:hover{
+    background:rgba(12,28,18,.92);
+    border-color:var(--borderStrong);
+}
+
+.eventNode{
+    font-size:12px;
+    letter-spacing:.06em;
+}
+
+.eventData{
+    padding:5px 8px;
+    border-radius:8px;
+    background:rgba(255,255,255,.018);
+}
+
+.empty{
+    background:rgba(5,12,8,.45);
+}
+
+.popupBG{
+    background:rgba(0,0,0,.82);
+    backdrop-filter:blur(10px);
+}
+
+.popup{
+    position:relative;
+    overflow:hidden;
+    width:min(500px,100%);
+    padding:38px;
+    background:linear-gradient(145deg,#220b0e,#0e0607);
+    border:1px solid rgba(255,95,104,.55);
+    border-radius:24px;
+    box-shadow:0 30px 100px rgba(0,0,0,.65),0 0 50px rgba(255,95,104,.08);
+}
+
+.popup::before{
+    content:"";
+    position:absolute;
+    left:0;
+    right:0;
+    top:0;
+    height:3px;
+    background:linear-gradient(90deg,transparent,var(--red),transparent);
+}
+
+.popupIcon{
+    filter:drop-shadow(0 0 12px rgba(255,95,104,.3));
+}
+
+.popup h2{letter-spacing:-.02em}
+
+footer{
+    width:min(1450px,calc(100% - 32px));
+    margin:0 auto 30px;
+    padding:18px 20px;
+    border:1px solid var(--border);
+    border-radius:16px;
+    background:rgba(5,13,8,.7);
+    box-shadow:var(--shadow);
+}
+
+.footerGrid{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.footerBrand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.footerMark{
+    width:34px;
+    height:34px;
+    display:grid;
+    place-items:center;
+    border:1px solid var(--borderStrong);
+    border-radius:10px;
+    background:#0b1a11;
+}
+
+.footerText strong{
+    display:block;
+    font-size:13px;
+}
+
+.footerText span{
+    display:block;
+    margin-top:3px;
+    color:var(--muted);
+    font-size:11px;
+}
+
+.team{
+    text-align:right;
+}
+
+.team strong{
+    display:block;
+    color:var(--green);
+    font-size:11px;
+    letter-spacing:.14em;
+}
+
+.team span{
+    display:block;
+    margin-top:5px;
+    color:#a9b9af;
+    font-size:12px;
+}
+
+@media(max-width:700px){
+    .brand h1::after{display:block;margin-top:4px}
+    .sectionTitle{display:block}
+    .event{grid-template-columns:1fr 1fr}
+    .team{text-align:left}
+}
+
+@media(max-width:550px){
+    main{width:min(100% - 20px,1450px);padding-top:22px}
+    .stats{gap:10px}
+    .stat{min-height:100px;padding:17px}
+    .stat strong{font-size:28px}
+    .sensor{padding:18px}
+    .event{grid-template-columns:1fr}
+    footer{width:calc(100% - 20px)}
+}
+
+
+/* ===== SECTION NAVIGATION / ACTION BUTTONS ===== */
+.sectionNav{
+    position:sticky;
+    top:82px;
+    z-index:40;
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-bottom:22px;
+    padding:10px;
+    background:rgba(3,8,5,.86);
+    border:1px solid var(--border);
+    border-radius:15px;
+    backdrop-filter:blur(14px);
+    box-shadow:0 12px 35px rgba(0,0,0,.22);
+}
+.navBtn{
+    flex:1 1 130px;
+    min-width:120px;
+    padding:11px 14px;
+    border-radius:10px;
+    background:rgba(10,25,16,.9);
+    color:var(--muted);
+    border:1px solid rgba(91,255,150,.10);
+}
+.navBtn:hover,
+.navBtn.active{
+    color:var(--green);
+    border-color:var(--borderStrong);
+    background:linear-gradient(145deg,#12301e,#09150e);
+    box-shadow:0 0 20px rgba(85,255,154,.08);
+}
+.sectionActions{
+    display:flex;
+    gap:8px;
+    align-items:center;
+    flex-wrap:wrap;
+}
+.actionBtn{
+    padding:8px 12px;
+    font-size:11px;
+    border-radius:9px;
+}
+.actionBtn.danger{
+    color:var(--red);
+    border-color:rgba(255,95,104,.22);
+    background:rgba(40,10,13,.5);
+}
+.actionBtn.success{
+    color:var(--green);
+}
+#dashboardSection,
+#sensorSection,
+#alertSection,
+#eventSection{
+    scroll-margin-top:145px;
+}
+@media(max-width:700px){
+    .sectionNav{
+        top:74px;
+    }
+    .navBtn{
+        flex:1 1 calc(50% - 8px);
+    }
+}
+@media(max-width:450px){
+    .navBtn{
+        flex:1 1 100%;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="brand">
+
+<div class="logo">
+🛡️
+</div>
+
+<div>
+
+<h1>
+EXAMGUARD
+</h1>
+
+<p>
+ESP32-Based Examination Hall Wireless
+Activity Detection and Alert System
+</p>
+
+</div>
+
+</div>
+
+<div class="headerRight">
+
+<div
+id="connection"
+class="connection offline"
+>
+● Connecting...
+</div>
+
+<button id="soundButton">
+🔇 Enable Sound
+</button>
+
+</div>
+
+</header>
+
+<main>
+
+<div id="dashboardSection" class="stats">
+
+<div class="stat">
+<span>SENSOR NODES</span>
+<strong id="totalSensors">0</strong>
+</div>
+
+<div class="stat">
+<span>ONLINE</span>
+<strong id="onlineSensors" class="green">0</strong>
+</div>
+
+<div class="stat">
+<span>ALERTS</span>
+<strong id="alertCount" class="red">0</strong>
+</div>
+
+<div class="stat">
+<span>SYSTEM</span>
+<strong id="systemStatus" class="red">OFFLINE</strong>
+</div>
+
+</div>
+
+
+<div class="sectionActions" style="margin-top:14px;">
+    <button class="actionBtn success" data-target="sensorSection">Open Sensors</button>
+    <button class="actionBtn danger" data-target="alertSection">Open Alerts</button>
+    <button class="actionBtn" data-target="eventSection">Open Event History</button>
+</div>
+
+<div id="message" class="message">
+Connecting to Firebase...
+</div>
+
+
+<div class="sectionNav" aria-label="Dashboard navigation">
+    <button class="navBtn active" data-target="dashboardSection">⌂ Dashboard</button>
+    <button class="navBtn" data-target="sensorSection">◉ Sensors</button>
+    <button class="navBtn" data-target="alertSection">⚠ Alerts</button>
+    <button class="navBtn" data-target="eventSection">☷ Events</button>
+</div>
+
+<section id="sensorSection">
+
+<div class="sectionTitle">
+
+<h2>
+Sensor Nodes
+</h2>
+
+<p>
+Real-time wireless activity indicators
+</p>
+<div class="sectionActions">
+    <button class="actionBtn success" id="refreshSensors">↻ Refresh</button>
+    <button class="actionBtn" data-target="dashboardSection">↑ Top</button>
+</div>
+
+</div>
+
+<div id="sensorGrid" class="sensorGrid">
+
+<div class="empty">
+Waiting for sensor...
+</div>
+
+</div>
+
+</section>
+
+<section id="alertSection">
+
+<div class="sectionTitle">
+
+<h2>
+⚠ Alerts
+</h2>
+
+<p>
+Events requiring human verification
+</p>
+<div class="sectionActions">
+    <button class="actionBtn danger" id="clearAlertView">Clear View</button>
+    <button class="actionBtn" data-target="eventSection">View Events</button>
+</div>
+
+</div>
+
+<div id="alerts" class="list">
+
+<div class="empty">
+No alerts.
+</div>
+
+</div>
+
+</section>
+
+<section id="eventSection">
+
+<div class="sectionTitle">
+
+<h2>
+Event History
+</h2>
+
+<p>
+Permanent wireless activity records
+</p>
+<div class="sectionActions">
+    <button class="actionBtn" id="refreshEvents">↻ Refresh</button>
+    <button class="actionBtn" data-target="alertSection">View Alerts</button>
+</div>
+
+</div>
+
+<div id="events" class="list">
+
+<div class="empty">
+No events.
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+<div
+id="popupBG"
+class="popupBG hidden"
+>
+
+<div class="popup">
+
+<div class="popupIcon">
+⚠️
+</div>
+
+<h2>
+Activity Alert
+</h2>
+
+<p id="popupText">
+High wireless activity detected.
+</p>
+
+<button id="closePopup">
+ACKNOWLEDGE
+</button>
+
+</div>
+
+</div>
+
+
+<footer>
+    <div class="footerGrid">
+        <div class="footerBrand">
+            <div class="footerMark">🛡️</div>
+            <div class="footerText">
+                <strong>ExaShield Monitoring System</strong>
+                <span>Real-time examination hall wireless activity dashboard</span>
+            </div>
+        </div>
+        <div class="team">
+            <strong>TEAM H&amp;S TECH</strong>
+            <span>MH HRIDOY&nbsp;&nbsp;•&nbsp;&nbsp; UMMA HABIBA SUMI</span>
+        </div>
+    </div>
+</footer>
+
+<script type="module">
+
+import {
+    initializeApp
+}
+from
+"https://***********************ase-app.js";
+
+import {
+    getDatabase,
+    ref,
+    onValue,
+    query,
+    orderByChild,
+    limitToLast
+}
+from
+"https://www.g***********************firebase-database.js";
+
+const firebaseConfig = {
+
+    apiKey:  "A************************co",
+
+    authDomain: "ex***********************com",
+
+    databaseURL: "https://exa***********************e.app",
+
+    projectId: "e***********************4",
+
+    storageBucket: "ex***********************app",
+
+    messagingSenderId:  "104***********************960",
+
+    appId:  "1:1***********************4c94d5",
+
+    measurementId:  "***********************HF"
+};
+
+const app =
+    initializeApp(
+        firebaseConfig
+    );
+
+const db =
+    getDatabase(
+        app
+    );
+
+const connection =
+    document.getElementById(
+        "connection"
+    );
+
+const soundButton =
+    document.getElementById(
+        "soundButton"
+    );
+
+const totalSensors =
+    document.getElementById(
+        "totalSensors"
+    );
+
+const onlineSensors =
+    document.getElementById(
+        "onlineSensors"
+    );
+
+const alertCount =
+    document.getElementById(
+        "alertCount"
+    );
+
+const systemStatus =
+    document.getElementById(
+        "systemStatus"
+    );
+
+const message =
+    document.getElementById(
+        "message"
+    );
+
+const sensorGrid =
+    document.getElementById(
+        "sensorGrid"
+    );
+
+const alerts =
+    document.getElementById(
+        "alerts"
+    );
+
+const events =
+    document.getElementById(
+        "events"
+    );
+
+const popupBG =
+    document.getElementById(
+        "popupBG"
+    );
+
+const popupText =
+    document.getElementById(
+        "popupText"
+    );
+
+const closePopup =
+    document.getElementById(
+        "closePopup"
+    );
+
+let audioContext = null;
+
+let soundEnabled = false;
+
+let lastAlertID = null;
+
+soundButton.addEventListener(
+    "click",
+    async () => {
+
+        try {
+
+            if (!audioContext) {
+
+                audioContext =
+                    new (
+                        window.AudioContext ||
+                        window.webkitAudioContext
+                    )();
+            }
+
+            if (
+                audioContext.state ===
+                "suspended"
+            ) {
+
+                await audioContext.resume();
+            }
+
+            soundEnabled = true;
+
+            soundButton.textContent =
+                "🔊 Sound ON";
+
+            beep(
+                700,
+                150
+            );
+
+        } catch (error) {
+
+            console.error(
+                error
+            );
+        }
+    }
+);
+
+function beep(
+    frequency,
+    duration
+) {
+
+    if (
+        !soundEnabled ||
+        !audioContext
+    ) {
+
+        return;
+    }
+
+    const oscillator =
+        audioContext.createOscillator();
+
+    const gain =
+        audioContext.createGain();
+
+    oscillator.type =
+        "square";
+
+    oscillator.frequency.value =
+        frequency;
+
+    gain.gain.setValueAtTime(
+        0.0001,
+        audioContext.currentTime
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        0.25,
+        audioContext.currentTime + 0.02
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        0.0001,
+        audioContext.currentTime +
+        duration / 1000
+    );
+
+    oscillator.connect(
+        gain
+    );
+
+    gain.connect(
+        audioContext.destination
+    );
+
+    oscillator.start();
+
+    oscillator.stop(
+        audioContext.currentTime +
+        duration / 1000
+    );
+}
+
+function alarm() {
+
+    beep(
+        1000,
+        250
+    );
+
+    setTimeout(
+        () => {
+
+            beep(
+                700,
+                250
+            );
+
+        },
+        300
+    );
+
+    setTimeout(
+        () => {
+
+            beep(
+                1000,
+                350
+            );
+
+        },
+        600
+    );
+}
+
+const connectedRef =
+    ref(
+        db,
+        ".info/connected"
+    );
+
+onValue(
+    connectedRef,
+    snapshot => {
+
+        const connected =
+            snapshot.val() === true;
+
+        if (connected) {
+
+            connection.textContent =
+                "● Firebase ONLINE";
+
+            connection.className =
+                "connection online";
+
+            systemStatus.textContent =
+                "ONLINE";
+
+            systemStatus.className =
+                "green";
+
+            message.textContent =
+                "Firebase connection established.";
+
+        } else {
+
+            connection.textContent =
+                "● Firebase OFFLINE";
+
+            connection.className =
+                "connection offline";
+
+            systemStatus.textContent =
+                "OFFLINE";
+
+            systemStatus.className =
+                "red";
+
+            message.textContent =
+                "Firebase connection lost.";
+        }
+    }
+);
+
+onValue(
+    ref(
+        db,
+        "sensors"
+    ),
+    snapshot => {
+
+        renderSensors(
+            snapshot.val() || {}
+        );
+    }
+);
+
+function renderSensors(
+    data
+) {
+
+    sensorGrid.innerHTML = "";
+
+    const list =
+        Object.entries(
+            data
+        );
+
+    totalSensors.textContent =
+        list.length;
+
+    let online = 0;
+
+    if (
+        list.length === 0
+    ) {
+
+        sensorGrid.innerHTML =
+            `
+            <div class="empty">
+                No sensor connected yet.
+            </div>
+            `;
+
+        onlineSensors.textContent =
+            "0";
+
+        return;
+    }
+
+    list.forEach(
+        ([id, sensor]) => {
+
+            const activity =
+                Number(
+                    sensor.activity || 0
+                );
+
+            const packets =
+                Number(
+                    sensor.packets || 0
+                );
+
+            const rssi =
+                Number(
+                    sensor.wifiRssi ||
+                    sensor.rssi ||
+                    0
+                );
+
+            const channel =
+                Number(
+                    sensor.channel || 0
+                );
+
+            const level =
+                sensor.level ||
+                (
+                    activity >= 500
+                    ? "HIGH"
+                    : activity >= 200
+                    ? "MEDIUM"
+                    : "LOW"
+                );
+
+            const isOnline =
+                sensor.status ===
+                "ONLINE";
+
+            if (isOnline) {
+                online++;
+            }
+
+            const percentage =
+                Math.min(
+                    100,
+                    activity / 10
+                );
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+            card.className =
+                "sensor";
+
+            card.innerHTML =
+                `
+
+                <div class="sensorTop">
+
+                    <div class="node">
+                        ${id.toUpperCase()}
+                    </div>
+
+                    <div class="status ${
+                        isOnline
+                        ? "online"
+                        : "offline"
+                    }">
+
+                        ${
+                            isOnline
+                            ? "● ONLINE"
+                            : "● OFFLINE"
+                        }
+
+                    </div>
+
+                </div>
+
+                <div class="label">
+                    WIRELESS ACTIVITY
+                </div>
+
+                <div class="activity">
+                    ${activity}
+                </div>
+
+                <div class="level ${
+                    level.toLowerCase()
+                }">
+                    ${level}
+                </div>
+
+                <div class="bar">
+
+                    <div
+                        class="barFill"
+                        style="width:${percentage}%"
+                    ></div>
+
+                </div>
+
+                <div class="details">
+
+                    <span>
+                        Packets: ${packets}
+                    </span>
+
+                    <span>
+                        Channel: ${channel}
+                    </span>
+
+                    <span>
+                        Wi-Fi RSSI: ${rssi} dBm
+                    </span>
+
+                    <span>
+                        Node ID: ${sensor.nodeId || "-"}
+                    </span>
+
+                </div>
+
+                `;
+
+            sensorGrid.appendChild(
+                card
+            );
+        }
+    );
+
+    onlineSensors.textContent =
+        online;
+
+    message.textContent =
+        `${online} of ${list.length} sensor node(s) online.`;
+}
+
+const alertsQuery =
+    query(
+        ref(
+            db,
+            "alerts"
+        ),
+        orderByChild(
+            "timestamp"
+        ),
+        limitToLast(
+            30
+        )
+    );
+
+onValue(
+    alertsQuery,
+    snapshot => {
+
+        renderAlerts(
+            snapshot.val() || {}
+        );
+    }
+);
+
+function renderAlerts(
+    data
+) {
+
+    alerts.innerHTML = "";
+
+    const list =
+        Object.entries(
+            data
+        ).reverse();
+
+    alertCount.textContent =
+        list.length;
+
+    if (
+        list.length === 0
+    ) {
+
+        alerts.innerHTML =
+            `
+            <div class="empty">
+                No alerts.
+            </div>
+            `;
+
+        return;
+    }
+
+    list.forEach(
+        ([id, alert]) => {
+
+            const item =
+                document.createElement(
+                    "div"
+                );
+
+            item.className =
+                "alert";
+
+            item.innerHTML =
+                `
+
+                <div class="alertTitle">
+                    ⚠ HIGH WIRELESS ACTIVITY
+                </div>
+
+                <div class="alertText">
+
+                    Sensor:
+                    NODE-${alert.nodeId || "-"}
+
+                    <br>
+
+                    Activity:
+                    ${alert.activity || 0}
+
+                    <br>
+
+                    Packets:
+                    ${alert.packets || 0}
+
+                    <br>
+
+                    Channel:
+                    ${alert.channel || "-"}
+
+                    <br>
+
+                    Signal:
+                    ${alert.wifiRssi || "-"} dBm
+
+                    <br>
+
+                    Verification:
+                    ${alert.verification || "PENDING"}
+
+                    <br>
+
+                    ${
+                        alert.message ||
+                        "Human verification required."
+                    }
+
+                </div>
+
+                `;
+
+            alerts.appendChild(
+                item
+            );
+        }
+    );
+
+    const newest =
+        list[0];
+
+    if (
+        newest &&
+        lastAlertID !== null &&
+        newest[0] !== lastAlertID
+    ) {
+
+        alarm();
+
+        popupText.textContent =
+            `Node ${newest[1].nodeId || "-"} ` +
+            `reported HIGH wireless activity. ` +
+            `Please verify the situation.`;
+
+        popupBG.classList.remove(
+            "hidden"
+        );
+    }
+
+    if (newest) {
+        lastAlertID =
+            newest[0];
+    }
+}
+
+closePopup.addEventListener(
+    "click",
+    () => {
+
+        popupBG.classList.add(
+            "hidden"
+        );
+    }
+);
+
+const eventsQuery =
+    query(
+        ref(
+            db,
+            "events"
+        ),
+        orderByChild(
+            "timestamp"
+        ),
+        limitToLast(
+            50
+        )
+    );
+
+onValue(
+    eventsQuery,
+    snapshot => {
+
+        renderEvents(
+            snapshot.val() || {}
+        );
+    }
+);
+
+function renderEvents(
+    data
+) {
+
+    events.innerHTML = "";
+
+    const list =
+        Object.entries(
+            data
+        ).reverse();
+
+    if (
+        list.length === 0
+    ) {
+
+        events.innerHTML =
+            `
+            <div class="empty">
+                No events.
+            </div>
+            `;
+
+        return;
+    }
+
+    list.forEach(
+        ([id, event]) => {
+
+            const item =
+                document.createElement(
+                    "div"
+                );
+
+            item.className =
+                "event";
+
+            item.innerHTML =
+                `
+
+                <div class="eventNode">
+                    NODE-${event.nodeId || "-"}
+                </div>
+
+                <div class="eventData">
+                    Activity:
+                    ${event.activity || 0}
+                </div>
+
+                <div class="eventData">
+                    Packets:
+                    ${event.packets || 0}
+                </div>
+
+                <div class="eventData">
+                    Level:
+                    ${event.level || "LOW"}
+                </div>
+
+                `;
+
+            events.appendChild(
+                item
+            );
+        }
+    );
+}
+
+
+/* ===== SECTION BUTTON CONTROLS ===== */
+const navButtons = document.querySelectorAll(".navBtn");
+const targetButtons = document.querySelectorAll("[data-target]");
+
+function goToSection(id){
+    const target = document.getElementById(id);
+    if(!target) return;
+    target.scrollIntoView({behavior:"smooth", block:"start"});
+
+    navButtons.forEach(btn=>{
+        btn.classList.toggle("active", btn.dataset.target === id);
+    });
+}
+
+targetButtons.forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+        if(btn.dataset.target) goToSection(btn.dataset.target);
+    });
+});
+
+window.addEventListener("scroll", ()=>{
+    const sections = [
+        document.getElementById("dashboardSection"),
+        document.getElementById("sensorSection"),
+        document.getElementById("alertSection"),
+        document.getElementById("eventSection")
+    ];
+
+    let current = "dashboardSection";
+    for(const section of sections){
+        if(!section) continue;
+        if(window.scrollY + 190 >= section.offsetTop){
+            current = section.id;
+        }
+    }
+
+    navButtons.forEach(btn=>{
+        btn.classList.toggle("active", btn.dataset.target === current);
+    });
+});
+
+document.getElementById("refreshSensors")?.addEventListener("click", ()=>{
+    message.textContent = "Sensor data is live. Refreshing the dashboard view...";
+    setTimeout(()=>{
+        message.textContent = "Sensor data is connected to Firebase real-time updates.";
+    }, 900);
+});
+
+document.getElementById("refreshEvents")?.addEventListener("click", ()=>{
+    message.textContent = "Event history is already synchronized with Firebase.";
+});
+
+document.getElementById("clearAlertView")?.addEventListener("click", ()=>{
+    alerts.innerHTML = `<div class="empty">Alert view cleared. New Firebase alerts will appear automatically.</div>`;
+    alertCount.textContent = "0";
+    message.textContent = "Alert view cleared locally. Firebase data was not deleted.";
+});
+
+</script>
+</body>
+</html>
