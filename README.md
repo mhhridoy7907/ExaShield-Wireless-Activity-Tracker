@@ -12,6 +12,8 @@ An administrator can monitor connected sensor nodes, wireless activity levels, e
 
 ---
 
+
+
 ## 🏫 Project Information
 
 **University:** RTM Al-Kabir Technical University
@@ -95,26 +97,26 @@ The system is designed as a **decision-support and monitoring tool**, not as a s
         Wireless Environment
                 │
                 ▼
-       ┌──────────────────┐
-       │  ESP32 Sensor    │
-       │      Node        │
-       └────────┬─────────┘
+       ┌──────────────┐
+       │  ESP32 Sensor   │
+       │      Node       │
+       └───────┬──────┘
                 │
                 │ Wi-Fi
                 ▼
-       ┌──────────────────┐
+       ┌───────────────┐
        │ Firebase         │
        │ Realtime         │
        │ Database         │
-       └────────┬─────────┘
+       └──────┬────────┘
                 │
                 │ Real-time Sync
                 ▼
-       ┌──────────────────┐
-       │ Admin Web        │
-       │ Dashboard        │
-       └────────┬─────────┘
-                │
+       ┌──────────────┐
+       │ Admin Web       │
+       │ Dashboard       │
+       └────────┬─────┘
+                  │
         ┌───────┴────────┐
         ▼                ▼
    Visual Alert      Audio Alert
