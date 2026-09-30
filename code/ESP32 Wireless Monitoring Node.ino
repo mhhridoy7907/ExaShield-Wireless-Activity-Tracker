@@ -653,6 +653,8 @@ void uploadDevices() {
   );
 }
 
+
+
 void uploadHeartbeat() {
 
   String node =
@@ -698,6 +700,8 @@ void uploadHeartbeat() {
     json
   );
 }
+
+
 
 void setup() {
 
@@ -831,18 +835,9 @@ void loop() {
 
     portENTER_CRITICAL(&mux);
 
-    for (
-      int i = 0;
-      i < MAX_DEVICES;
-      i++
-    ) {
+    for ( int i = 0; i < MAX_DEVICES; i++) {
 
-      if (
-        devices[i].id != 0 &&
-        now -
-        devices[i].lastSeen <=
-        DEVICE_TIMEOUT
-      ) {
+      if (  devices[i].id != 0 && now - devices[i].lastSeen <= DEVICE_TIMEOUT ) {
         count++;
       }
     }
@@ -851,11 +846,7 @@ void loop() {
 
     Serial.println(count);
 
-    for (
-      int i = 0;
-      i < MAX_DEVICES;
-      i++
-    ) {
+    for ( int i = 0; i < MAX_DEVICES; i++) {
 
       uint32_t packets;
       uint32_t id;
@@ -863,14 +854,11 @@ void loop() {
 
       portENTER_CRITICAL(&mux);
 
-      id =
-        devices[i].id;
+      id =  devices[i].id;
 
-      packets =
-        devices[i].packets;
+      packets = devices[i].packets;
 
-      lastSeen =
-        devices[i].lastSeen;
+      lastSeen = devices[i].lastSeen;
 
       portEXIT_CRITICAL(&mux);
 
@@ -878,11 +866,8 @@ void loop() {
         continue;
       }
 
-      if (
-        millis() -
-        lastSeen >
-        DEVICE_TIMEOUT
-      ) {
+      if ( millis() - lastSeen > DEVICE_TIMEOUT )
+      {
         continue;
       }
 
@@ -925,17 +910,10 @@ void loop() {
     blueOn();
   }
 
-  if (
-    millis() -
-    lastHeartbeat >=
-    HEARTBEAT_INTERVAL
-  ) {
-
-    lastHeartbeat =
-      millis();
-
+  if ( millis() - lastHeartbeat >= HEARTBEAT_INTERVAL)
+  {
+    lastHeartbeat = millis();
     uploadHeartbeat();
-
     blueOn();
   }
 
