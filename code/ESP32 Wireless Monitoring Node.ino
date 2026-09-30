@@ -12,8 +12,8 @@
 #define BLUE_LED_PIN 2
 #define RED_LED_PIN 4
 
-const char* FIREBASE_URL =
-  "https://hridoy-and-sumi-default-rtdb.asia-southeast1.firebasedatabase.app";
+const char* FIREBASE_URL =  "https://hri*****************************************************e.app";
+
 
 const unsigned long UPLOAD_INTERVAL = 5000;
 const unsigned long HEARTBEAT_INTERVAL = 15000;
