@@ -1,8 +1,8 @@
 # 🛡️ ExaShield
 
-ESP32-Based Examination Hall Wireless Activity Detection and Alert System
+## ESP32-Based Examination Hall Wireless Activity Detection and Alert System
 
-«“Detect Wireless Activity Before It Becomes a Problem.”»
+> **“Detect Wireless Activity Before It Becomes a Problem.”**
 
 ExaShield is an IoT-based examination monitoring and wireless activity awareness system designed to assist examination authorities in observing unusual wireless activity within examination environments.
 
@@ -10,37 +10,40 @@ The current prototype uses ESP32-based sensor nodes to monitor the surrounding W
 
 The system provides a centralized web dashboard where administrators can monitor sensor nodes, wireless activity levels, events, system status, and alerts in real time.
 
-As a future development, ExaShield can be extended with dedicated RF power detection hardware such as the AD8318 to monitor RF energy in supported frequency ranges. This would provide an additional sensing layer for environments where cellular/mobile-network RF activity may need to be studied alongside Wi-Fi activity.
+As a future development, ExaShield can be extended with dedicated RF power detection hardware such as the **AD8318** to monitor RF energy in supported frequency ranges. This would provide an additional sensing layer for environments where cellular/mobile-network RF activity may need to be studied alongside Wi-Fi activity.
 
-«Important: ExaShield is an assistance and monitoring system. Wireless activity measurements are indicators only; they do not identify individual students, determine who generated a signal, reveal communication content, or provide definitive proof of examination misconduct.»
-
----
-
-🏫 Project Information
-
-Information| Details
-University| RTM Al-Kabir Technical University
-Location| Sylhet, Bangladesh
-Project| ExaShield
-Original Project Name| ExamGuard
-Team| H&S Tech
-Project Type| Academic IoT / Embedded Systems Project
-Current Status| Prototype / Academic Project
-
-👥 Team Members
-
-- MH Hridoy
-- Umma Habiba Sumi
+> **Important:** ExaShield is an assistance and monitoring system. Wireless activity measurements are indicators only; they do not identify individual students, determine who generated a signal, reveal communication content, or provide definitive proof of examination misconduct.
 
 ---
 
-💡 Project Idea
+# 🏫 Project Information
 
-Idea Title
+| Information | Details |
+|---|---|
+| **University** | RTM Al-Kabir Technical University |
+| **Location** | Sylhet, Bangladesh |
+| **Project** | ExaShield |
+| **Original Project Name** | ExamGuard |
+| **Team** | H&S Tech |
+| **Project Type** | Academic IoT / Embedded Systems Project |
+| **Current Status** | Prototype / Academic Project |
 
-ExaShield — ESP32-Based Examination Hall Wireless Activity Detection and Alert System
+---
 
-Idea Category
+# 👥 Team Members
+
+- **MH Hridoy**
+- **Umma Habiba Sumi**
+
+---
+
+# 💡 Project Idea
+
+## Idea Title
+
+**ExaShield — ESP32-Based Examination Hall Wireless Activity Detection and Alert System**
+
+## Idea Category
 
 - IoT
 - Embedded Systems
@@ -52,7 +55,7 @@ Idea Category
 
 ---
 
-🎯 Target Users
+# 🎯 Target Users
 
 ExaShield is intended to assist:
 
@@ -68,7 +71,7 @@ The architecture is particularly suitable for environments where a large number 
 
 ---
 
-❗ Problem Statement
+# ❗ Problem Statement
 
 Monitoring unauthorized electronic or wireless activity during examinations is largely dependent on direct human observation.
 
@@ -78,11 +81,11 @@ This creates a need for a low-cost, automated, and real-time monitoring system t
 
 However, wireless activity alone cannot establish who generated a signal or whether the activity represents misconduct.
 
-Therefore, ExaShield is designed as a decision-support system that provides wireless activity information to human invigilators rather than automatically identifying or accusing students.
+Therefore, ExaShield is designed as a **decision-support system** that provides wireless activity information to human invigilators rather than automatically identifying or accusing students.
 
 ---
 
-✅ Proposed Solution
+# ✅ Proposed Solution
 
 ExaShield uses distributed sensor nodes to observe the wireless environment of an examination area.
 
@@ -97,16 +100,17 @@ When activity reaches a configurable threshold, the system can generate an alert
 - Audio notification
 - ESP32 LED indication
 
-The future architecture can additionally integrate an AD8318 RF power detector with an appropriate RF front-end to measure RF signal strength in supported frequency ranges.
+The future architecture can additionally integrate an **AD8318 RF power detector** with an appropriate RF front-end to measure RF signal strength in supported frequency ranges.
 
 This future RF sensing layer would complement the existing Wi-Fi monitoring system rather than replace it.
 
 ---
 
-🔄 System Architecture
+# 🔄 System Architecture
 
-Current Architecture
+## Current Architecture
 
+```text
              Wireless Environment
                      │
                      ▼
@@ -131,11 +135,13 @@ Current Architecture
               ┌──────┴──────┐
               ▼             ▼
         Visual Alert    Audio Alert
+```
 
 ---
 
-🔮 Future Multi-Layer RF Monitoring Architecture
+# 🔮 Future Multi-Layer RF Monitoring Architecture
 
+```text
                   Wireless Environment
                           │
              ┌────────────┴────────────┐
@@ -164,12 +170,13 @@ Current Architecture
              ┌────────────┼────────────┐
              ▼            ▼            ▼
           Events        Alerts      Analytics
+```
 
 ---
 
-⚙️ Main Modules
+# ⚙️ Main Modules
 
-1. ESP32 Monitoring Module
+## 1. ESP32 Monitoring Module
 
 The ESP32 sensor node observes the surrounding Wi-Fi environment and processes wireless activity locally.
 
@@ -188,42 +195,46 @@ Each ESP32 can operate as an independent sensor node.
 
 ---
 
-2. Internet Connectivity Module
+## 2. Internet Connectivity Module
 
-The ESP32 connects to a configured Wi-Fi network using WiFiManager.
+The ESP32 connects to a configured Wi-Fi network using **WiFiManager**.
 
 This allows the device to be configured through a smartphone or computer without hard-coding Wi-Fi credentials into the firmware.
 
-Default Configuration Network
+### Default Configuration
 
+```text
+Configuration Network:
 ExaShield-Setup-1
 
-Configuration Portal
-
+Configuration Portal:
 192.168.4.1
+```
 
 ---
 
-3. Firebase Cloud Module
+## 3. Firebase Cloud Module
 
 Firebase Realtime Database is used as the cloud backend.
 
 The system stores and synchronizes information through logical paths such as:
 
+```text
 /sensors
 /nodes
 /events
 /alerts
+```
 
 This allows the administrator dashboard to receive updated sensor information in real time.
 
 ---
 
-4. Admin Web Dashboard
+# 🖥️ 4. Admin Web Dashboard
 
 The web dashboard provides centralized monitoring of the ExaShield system.
 
-Dashboard Functions
+### Dashboard Functions
 
 - Total sensor nodes
 - Online sensor count
@@ -239,13 +250,15 @@ Dashboard Functions
 
 ---
 
-5. Alert Module
+# 🔔 5. Alert Module
 
 When measured activity reaches a predefined threshold, ExaShield can generate a high-activity warning.
 
-Current Prototype Threshold
+### Current Prototype Threshold
 
+```text
 500 activity units / monitoring interval
+```
 
 The alert may contain:
 
@@ -259,27 +272,28 @@ The alert may contain:
 
 The dashboard can provide both visual and audio notifications.
 
-«Note: A threshold-based alert is only an indicator. It should not be interpreted as proof of cheating or unauthorized device use.»
+> **Note:** A threshold-based alert is only an indicator. It should not be interpreted as proof of cheating or unauthorized device use.
 
 ---
 
-6. Multiple Sensor Node Module
+# 📡 6. Multiple Sensor Node Module
 
 The architecture supports multiple ESP32 sensor nodes.
 
 For example:
 
+```text
 NODE-1
 NODE-2
 NODE-3
 NODE-4
+```
 
 Each node can report independently to the same Firebase backend.
 
-This makes it possible to distribute sensors throughout a large examination hall.
+### Example Examination Hall
 
-Example:
-
+```text
                  Examination Hall
         ┌─────────────────────────────┐
         │                             │
@@ -297,19 +311,21 @@ Example:
                        │
                        ▼
                 Admin Dashboard
+```
 
 ---
 
-📡 7. Future RF Monitoring Module — AD8318
+# 📡 7. Future RF Monitoring Module — AD8318
 
-One of the planned future improvements is the integration of the AD8318 RF power detector.
+One of the planned future improvements is the integration of the **AD8318 RF power detector**.
 
 The AD8318 is an RF detector IC designed to measure RF signal power over a wide frequency range.
 
 In the ExaShield architecture, it can be used as an additional RF sensing layer.
 
-Proposed Future Concept
+## Proposed Future Concept
 
+```text
 RF Environment
       │
       ▼
@@ -332,10 +348,13 @@ Firebase
       │
       ▼
 Admin Dashboard
+```
 
 The ESP32 would read the AD8318's analog output and convert the measurement into an RF activity indicator.
 
-## Possible Measurements
+---
+
+# 📊 Possible Measurements
 
 The future system could record information such as:
 
@@ -349,15 +368,22 @@ The future system could record information such as:
 
 ---
 
-## 📱 Future Mobile-Data / Cellular RF Monitoring
+# 📱 Future Mobile-Data / Cellular RF Monitoring
 
-A future version of ExaShield may investigate the use of AD8318-based RF sensing for observing cellular-band RF energy, subject to the frequency range, antenna, RF front-end, filtering, calibration, and local regulatory requirements.
+A future version of ExaShield may investigate the use of AD8318-based RF sensing for observing cellular-band RF energy, subject to:
+
+- Frequency range
+- Antenna characteristics
+- RF front-end design
+- Filtering
+- Calibration
+- Local regulatory requirements
 
 The purpose would be to determine whether the RF environment shows increased activity in supported cellular frequency bands.
 
-Important Technical Limitation
+## Important Technical Limitation
 
-The AD8318 does not directly identify:
+The AD8318 does **not** directly identify:
 
 - A particular mobile phone
 - A particular student
@@ -373,16 +399,17 @@ Instead, it provides a measurement related to RF power/signal strength at its in
 
 Therefore, a future ExaShield RF module should be described as:
 
-«RF activity / RF power monitoring»
+> **RF activity / RF power monitoring**
 
 rather than claiming that it can directly detect exactly which phone is using mobile data.
 
 ---
 
-## 🧠 Future Multi-Sensor Detection
+# 🧠 Future Multi-Sensor Detection
 
 The long-term architecture can combine multiple sensing methods.
 
+```text
                  ExaShield Sensor Node
                          │
           ┌──────────────┴──────────────┐
@@ -403,14 +430,15 @@ The long-term architecture can combine multiple sensing methods.
                          │
                          ▼
                  Admin Dashboard
+```
 
 This approach can provide a broader picture of the wireless environment than relying on a single sensing method.
 
 ---
 
-## 🚀 Key Features
+# 🚀 Key Features
 
-Current Prototype
+## Current Prototype
 
 - 📡 Wi-Fi wireless activity monitoring
 - 🧠 Local activity processing
@@ -449,23 +477,25 @@ Current Prototype
 
 ---
 
-## 📊 Activity Classification
+# 📊 Activity Classification
 
 The current prototype uses predefined activity levels:
 
-Activity| Level
-"0 – 199"| LOW
-"200 – 499"| MEDIUM
-"500+"| HIGH
+| Activity | Level |
+|---:|:---|
+| 0 – 199 | 🟢 LOW |
+| 200 – 499 | 🟡 MEDIUM |
+| 500+ | 🔴 HIGH |
 
-When activity reaches HIGH, an alert can be generated.
+When activity reaches **HIGH**, an alert can be generated.
 
-These thresholds are configurable and should be calibrated through controlled experiments before any real-world deployment.
+> These thresholds are configurable and should be calibrated through controlled experiments before any real-world deployment.
 
 ---
 
-## 🔔 Alert Workflow
+# 🔔 Alert Workflow
 
+```text
 Wireless Activity Detected
             │
             ▼
@@ -490,13 +520,15 @@ Wireless Activity Detected
         │
         ▼
  Continue Monitoring
+```
 
 ---
 
-## 🗄️ Firebase Data Structure
+# 🗄️ Firebase Data Structure
 
 The prototype uses the following logical database structure:
 
+```text
 exashield-dabd4
 │
 ├── sensors
@@ -541,33 +573,34 @@ exashield-dabd4
         ├── channel
         ├── wifiRssi
         └── timestamp
+```
 
 ---
 
-## 🛠️ Technology Stack
+# 🛠️ Technology Stack
 
-Hardware
+## Hardware
 
-Current Prototype
+### Current Prototype
 
 - ESP32
 - LED
 - Power supply
 - Optional buzzer
 
-## Wireless/RF Expansion
+### Wireless / RF Expansion
 
 - AD8318 RF power detector
 - Appropriate RF antenna
-- RF filtering/front-end
-- RF connectors/cabling
+- RF filtering / front-end
+- RF connectors / cabling
 - Additional RF sensing hardware where required
 
-«Note: The final RF front-end must be selected according to the frequency band being studied. AD8318 integration alone does not automatically provide cellular-band identification.»
+> **Note:** The final RF front-end must be selected according to the frequency band being studied. AD8318 integration alone does not automatically provide cellular-band identification.
 
 ---
 
-## 💻 Embedded Software
+# 💻 Embedded Software
 
 - C++
 - Arduino Framework
@@ -580,7 +613,7 @@ Current Prototype
 
 ---
 
-## ☁️ Cloud Technology
+# ☁️ Cloud Technology
 
 - Firebase Realtime Database
 - Firebase Web SDK
@@ -589,7 +622,7 @@ Current Prototype
 
 ---
 
-## 🌐 Web Technology
+# 🌐 Web Technology
 
 - HTML5
 - CSS3
@@ -599,10 +632,11 @@ Current Prototype
 
 ---
 
-## 📁 Project Structure
+# 📁 Project Structure
 
 Recommended repository structure:
 
+```text
 ExaShield-Wireless-Activity-Tracker/
 │
 ├── code/
@@ -628,49 +662,62 @@ ExaShield-Wireless-Activity-Tracker/
 │
 ├── .gitignore
 └── README.md
+```
 
 ---
 
-## 🔧 Configuration
+# 🔧 Configuration
 
 Before uploading the firmware, configure the Firebase endpoint:
 
+```cpp
 const char* FIREBASE_URL =
   "https://YOUR-PROJECT-default-rtdb.REGION.firebasedatabase.app";
+```
 
 Each ESP32 sensor should have a unique node ID:
 
+```cpp
 #define NODE_ID 1
+```
 
 For another sensor:
 
+```cpp
 #define NODE_ID 2
+```
 
 The activity threshold can be adjusted:
 
+```cpp
 const uint16_t ALERT_THRESHOLD = 500;
+```
 
 ---
 
-## 📡 Wi-Fi Setup
+# 📡 Wi-Fi Setup
 
 On startup, the ESP32 can create a configuration access point:
 
+```text
 ExaShield-Setup-1
+```
 
 Connect a smartphone or computer to the network and open:
 
+```text
 192.168.4.1
+```
 
 The administrator can then select the examination network's Wi-Fi credentials and configure the ESP32.
 
 ---
 
-## 🖥️ Admin Dashboard
+# 🖥️ Admin Dashboard
 
 The administrator dashboard contains four primary areas.
 
-Dashboard
+## Dashboard
 
 Displays:
 
@@ -680,7 +727,7 @@ Displays:
 - Alerts
 - System health
 
-Sensors
+## Sensors
 
 Displays:
 
@@ -692,7 +739,7 @@ Displays:
 - Last seen
 - Uptime
 
-Alerts
+## Alerts
 
 Displays:
 
@@ -702,17 +749,17 @@ Displays:
 - Activity level
 - Verification status
 
-Events
+## Events
 
 Displays historical sensor activity.
 
 ---
 
-## 🔒 Privacy & Responsible Use
+# 🔒 Privacy & Responsible Use
 
 ExaShield is intentionally designed around activity-based monitoring.
 
-The system does not attempt to:
+The system does **not** attempt to:
 
 - Identify individual students
 - Capture student identities
@@ -731,7 +778,7 @@ Any future cellular/RF monitoring functionality should also be designed and depl
 
 ---
 
-## ⚠️ Limitations
+# ⚠️ Limitations
 
 The current prototype has several limitations:
 
@@ -751,9 +798,9 @@ The current prototype has several limitations:
 
 ---
 
-## 🔮 Future Development Roadmap
+# 🔮 Future Development Roadmap
 
-### Phase 1 — Current Prototype
+## Phase 1 — Current Prototype
 
 - ESP32 sensor node
 - Wi-Fi activity monitoring
@@ -763,7 +810,7 @@ The current prototype has several limitations:
 - Alert generation
 - Multiple-node architecture
 
-### Phase 2 — System Improvement
+## Phase 2 — System Improvement
 
 - Firebase Authentication
 - Role-based administrator access
@@ -774,7 +821,7 @@ The current prototype has several limitations:
 - Offline data buffering
 - Hardware buzzer
 
-### Phase 3 — RF Monitoring
+## Phase 3 — RF Monitoring
 
 - AD8318 integration
 - RF power measurement
@@ -784,7 +831,7 @@ The current prototype has several limitations:
 - RF activity logging
 - RF threshold calibration
 
-### Phase 4 — Multi-Sensor Intelligence
+## Phase 4 — Multi-Sensor Intelligence
 
 - Wi-Fi + RF activity correlation
 - Multiple sensor comparison
@@ -793,7 +840,7 @@ The current prototype has several limitations:
 - Environmental baseline analysis
 - Anomaly detection
 
-### Phase 5 — Advanced Platform
+## Phase 5 — Advanced Platform
 
 - AI/ML-based anomaly analysis
 - Multi-hall monitoring
@@ -804,13 +851,13 @@ The current prototype has several limitations:
 
 ---
 
-## 🧪 Testing Approach
+# 🧪 Testing Approach
 
 The prototype should be evaluated in a controlled environment.
 
-Testing should include:
+## Wi-Fi Monitoring
 
-### Wi-Fi Monitoring
+Testing should include:
 
 - Normal examination environment
 - Different numbers of wireless devices
@@ -819,7 +866,9 @@ Testing should include:
 - Different activity thresholds
 - Multiple ESP32 nodes
 
-### System Reliability
+## System Reliability
+
+Testing should include:
 
 - Firebase connectivity loss
 - Wi-Fi disconnection
@@ -828,7 +877,9 @@ Testing should include:
 - Dashboard synchronization
 - Heartbeat monitoring
 
-### Alert System
+## Alert System
+
+Testing should include:
 
 - LOW activity
 - MEDIUM activity
@@ -836,7 +887,9 @@ Testing should include:
 - Repeated activity
 - Multiple simultaneous sensor alerts
 
-## Future RF Module
+---
+
+# 📡 Future RF Module Testing
 
 The AD8318-based module should be tested using controlled RF sources and appropriate test equipment.
 
@@ -861,7 +914,7 @@ Performance should be evaluated using measurable indicators such as:
 
 ---
 
-## 🎓 Feasibility
+# 🎓 Feasibility
 
 ExaShield is technically feasible as an academic prototype.
 
@@ -873,7 +926,7 @@ The planned AD8318 integration provides a possible path toward studying RF activ
 
 ---
 
-## 🌟 Innovation
+# 🌟 Innovation
 
 The main innovative aspects of ExaShield include:
 
@@ -891,20 +944,23 @@ The main innovative aspects of ExaShield include:
 
 ---
 
-## 📈 Scalability
+# 📈 Scalability
 
 ExaShield is designed with scalability in mind.
 
-A small deployment may use:
+## Small Deployment
 
+```text
 1 Examination Hall
       │
       ├── NODE-1
       └── NODE-2
+```
 
-A larger deployment may use:
+## Larger Deployment
 
-```University
+```text
+University
 │
 ├── Hall A
 │   ├── NODE-1
@@ -918,13 +974,14 @@ A larger deployment may use:
 │
 └── Hall C
     ├── NODE-7
-    └── NODE-8```
+    └── NODE-8
+```
 
 All sensor nodes can report to a centralized backend and dashboard.
 
 ---
 
-## 🔐 Production Security Considerations
+# 🔐 Production Security Considerations
 
 Before production deployment, the following should be implemented:
 
@@ -940,13 +997,13 @@ Before production deployment, the following should be implemented:
 - Administrator audit logs
 - Secure firmware update mechanism
 
-The prototype should not be deployed in a production environment using unrestricted database permissions.
+> The prototype should **not** be deployed in a production environment using unrestricted database permissions.
 
 ---
 
-## 📌 Project Status
+# 📌 Project Status
 
-Current Status: Prototype / Academic Project
+**Current Status:** Prototype / Academic Project
 
 The current system is intended for:
 
@@ -960,7 +1017,7 @@ The AD8318 RF monitoring component is currently planned as a future-development 
 
 ---
 
-## 📜 Disclaimer
+# 📜 Disclaimer
 
 ExaShield is an experimental academic IoT monitoring project.
 
@@ -974,22 +1031,22 @@ Any future RF/cellular monitoring implementation should be developed and deploye
 
 ---
 
-## 👨‍💻 Team
+# 👨‍💻 Team
 
-H&S Tech
+## H&S Tech
 
-MH Hridoy
-Umma Habiba Sumi
+**MH Hridoy**  
+**Umma Habiba Sumi**
 
-RTM Al-Kabir Technical University
-Sylhet, Bangladesh
+**RTM Al-Kabir Technical University**  
+**Sylhet, Bangladesh**
 
 ---
 
-## ⭐ Project Vision
+# ⭐ Project Vision
 
-«“Detect Wireless Activity Before It Becomes a Problem.”»
+> **“Detect Wireless Activity Before It Becomes a Problem.”**
 
 ExaShield aims to provide examination authorities with an affordable, scalable, and real-time wireless activity monitoring platform that supports human invigilators without replacing human judgment.
 
-The long-term vision is to combine ESP32 Wi-Fi monitoring, RF power sensing, cloud computing, real-time analytics, and intelligent anomaly detection into a modular platform for responsible examination-environment monitoring.
+The long-term vision is to combine **ESP32 Wi-Fi monitoring, RF power sensing, cloud computing, real-time analytics, and intelligent anomaly detection** into a modular platform for responsible examination-environment monitoring.
